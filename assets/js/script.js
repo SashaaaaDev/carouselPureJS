@@ -16,7 +16,7 @@ function Carousel() {
 
 Carousel.prototype = {
   //move slide
-  goSlide (n) {
+  goSlide(n) {
     this.slide[this.countSlide].className = "wrap-item";
     this.countSlide = (this.SLIDES_COUNT + n) % this.SLIDES_COUNT;
     this.slide[this.countSlide].className = "wrap-item active";
@@ -24,7 +24,7 @@ Carousel.prototype = {
   },
 
   //pause button
-  pauseHandler () {
+  pauseHandler() {
     if (this.action) {
       this.pauseAction();
     } else {
@@ -32,29 +32,29 @@ Carousel.prototype = {
     }
   },
 
-  pauseAction () {
+  pauseAction() {
     this.buttonPause.innerHTML = "Play";
     clearInterval(this.action);
     this.action = false;
   },
 
   //next slide
-  nextHandler () {
+  nextHandler() {
     this.nextAndPause();
   },
 
-  nextSlide () {
+  nextSlide() {
     this.goSlide(this.countSlide + 1);
   },
 
-  playAction () {
+  playAction() {
     this.buttonPause.innerHTML = "Pause";
     this.action = setInterval(this.nextSlide.bind(this), this.interaval);
   },
 
   //previous slide
-  prevHandler () {
-    this.prevAndPause()
+  prevHandler() {
+    this.prevAndPause();
   },
 
   prevSlide() {
@@ -62,31 +62,31 @@ Carousel.prototype = {
   },
 
   //next+prev+pause
-  nextAndPause () {
+  nextAndPause() {
     this.nextSlide();
     this.pauseAction();
   },
 
-  prevAndPause () {
+  prevAndPause() {
     this.prevSlide();
     this.pauseAction();
   },
 
   //logic of pointers
-  pointersHandler (p) {
+  pointersHandler(p) {
     const index = [...this.pointers].indexOf(p.target);
     this.goSlide(index);
     this.pauseAction();
   },
 
   //add+remove active class
-  changeActive () {
+  changeActive() {
     this.pointers.forEach((p) => p.classList.remove("active"));
     this.pointers[this.countSlide].classList.add("active");
   },
 
   //manage keyboard
-  keyHandler (e) {
+  keyHandler(e) {
     switch (e.key) {
       case "ArrowLeft":
         this.prevAndPause();
@@ -104,25 +104,22 @@ Carousel.prototype = {
   },
 
   //slide mouse+finger
-  swipeStart (e) {
-    this.xDown = e instanceof TouchEvent 
-    ? e.touches[0].clientX : e.clientX;
+  swipeStart(e) {
+    this.xDown = e instanceof TouchEvent ? e.touches[0].clientX : e.clientX;
   },
 
-  swipeEnd (e) {
-    this.xUp= e instanceof TouchEvent
-    ? e.changedTouches[0].clientX : e.clientX;
-    if (this.xDown - this.xUp > 100) 
-      this.prevAndPause();
-    if (this.xDown - this.xUp < -100)
-      this.nextAndPause();
+  swipeEnd(e) {
+    this.xUp =
+      e instanceof TouchEvent ? e.changedTouches[0].clientX : e.clientX;
+    if (this.xDown - this.xUp > 100) this.prevAndPause();
+    if (this.xDown - this.xUp < -100) this.nextAndPause();
   },
 
   intervalSet() {
     setInterval(this.nextSlide.bind(this), this.interaval);
   },
 
-  listeners () {
+  listeners() {
     this.container.addEventListener("touchstart", this.swipeStart.bind(this));
     this.container.addEventListener("touchend", this.swipeEnd.bind(this));
     this.container.addEventListener("mousedown", this.swipeStart.bind(this));
@@ -130,17 +127,17 @@ Carousel.prototype = {
     this.prev.addEventListener("click", this.prevHandler.bind(this));
     this.next.addEventListener("click", this.nextHandler.bind(this));
     this.buttonPause.addEventListener("click", this.pauseHandler.bind(this));
-    this.pointers.forEach(pointer => {
+    this.pointers.forEach((pointer) => {
       pointer.addEventListener("click", this.pointersHandler.bind(this));
-  });
+    });
     document.addEventListener("keydown", this.keyHandler.bind(this));
   },
 
   //initialize
-  init () {
+  init() {
     this.listeners();
     this.intervalSet();
-  }
-}
+  },
+};
 const carousel = new Carousel();
 carousel.init();
