@@ -1,0 +1,126 @@
+body {
+  padding: 0;
+  margin: 0;
+  font-family: sans-serif;
+  color: bisque;
+  background-color: rgb(209, 209, 209);
+  /* overflow: hidden; */
+}
+
+/*style of slides*/
+li {
+  list-style: none;
+}
+
+.wrap {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.wrap-list {
+  position: relative;
+  height: 400px;
+  width: 90%;
+  margin: 0px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrap-item {
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: 1s opacity;
+  z-index: -999;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: hotpink;
+  font-size: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: bisque;
+}
+
+.wrap-item:nth-of-type(1) {
+  background-color: red;
+}
+
+.wrap-item:nth-of-type(2) {
+  background-color: blue;
+}
+
+.wrap-item:nth-of-type(3) {
+  background-color: green;
+}
+
+.wrap-item:nth-of-type(4) {
+  background-color: darkgoldenrod;
+}
+
+.wrap-item:nth-of-type(5) {
+  background-color: brown;
+}
+
+.wrap-item:nth-of-type(6) {
+  background-color: purple;
+}
+
+.active {
+  opacity: 1;
+  z-index: 2;
+}
+
+/*panel*/
+.control {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  gap: 40px;
+}
+
+.control>a {
+  text-decoration: none;
+  color: black;
+  font-size: 20px;
+  padding: 10px 20px;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: gray;
+  transition: all 0.3s;
+  user-select: none;
+  color: bisque;
+}
+
+.control>a:hover {
+  background-color: antiquewhite;
+  color: gray;
+}
+
+/*pointers of slides*/
+.pointers {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  gap: 30px;
+}
+
+.pointer {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: gray;
+  transition: all 0.3s;
+}
+
+.pointer:hover {
+  background-color: wheat;
+}
+.active{
+  background-color: rgb(184, 160, 114);
+}
